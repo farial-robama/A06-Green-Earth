@@ -11,6 +11,17 @@
       type="text/css"
     />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- google font -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Noto+Serif+JP:wght@200..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+     <style>
+        * {
+            font-family: "Inter", sans-serif;
+
+        }
+     </style>
   </head>
   <body>
     <header>
@@ -57,15 +68,47 @@
         </div>
       </nav>
 
-      <section class="banner bg-[#CFF0DC] w-full h-[383px] flex justify-evenly text-center items-center">
-        <img class="w-90 h-90" src="./assets/hero-leaf1.png" alt="">
+      <section class="banner bg-[#CFF0DC] w-full min-h-[383px] flex flex-col gap-3 md:flex-row justify-around text-center items-center">
+        <img class="max-w-lg lg:h-72" src="./assets/hero-leaf1.png" alt="">
         <div>
-            <h1 class="font-bold text-2xl text-[#1F2937]">Plant a Tree, Grow a Future</h1>
-        <p class="text-[#1F2937]">Join our mission to plant 1 million trees and make the Earth greener for future <br>generations.</p>
-        <button class="btn btn-active btn-primary text-[#15803D] bg-[#FACC15] rounded-3xl border-none m-3">Get Involved</button>
+            <h1 class="font-bold text-3xl w-full text-[#1F2937]">Plant a Tree, Grow a Future</h1>
+        <p class="text-[#1F2937] text-xs mt-3">Join our mission to plant 1 million trees and make the Earth greener for future <br>generations.</p>
+        <button class="btn btn-active btn-primary text-[#15803D] bg-[#FACC15] rounded-3xl border-none mt-3">Get Involved</button>
         </div>
-        <img class="w-90 h-90" src="./assets/hero-leaf2.png" alt="">
+        <img class="max-w-lg lg:h-72" src="./assets/hero-leaf2.png" alt="">
       </section>
     </header>
+
+    <main class="">
+        <section class="Choose Your Trees">
+
+        </section>
+        <section class="about-campaign bg-[#F0FDF4] text-[#1F2937] py-13">
+            <div class="flex flex-col items-center text-center px-9">
+                <h1 class="font-semibold text-2xl mb-6">About the Campaign</h1>
+            
+                <div class="flex flex-col md:flex-row lg:flex-row justify-between gap-6 items-center">
+                    <img src="./assets/about.png" alt="" class="max-w-sm">
+                <div class="max-w-2xl text-left flex flex-col justify-center">
+            <p>Green Earth is a global tree plantation initiative dedicated to fighting climate change. Since our start, we’ve planted over 500,000 trees worldwide. By joining our campaign, you help restore forests, create habitats for wildlife, and combat global warming.
+            </p>
+            <ul class="list-disc list-outside pl-6 mt-5">
+                <li>Restoration of natural habitats</li>
+               <li>Improvement of air quality</li>
+               <li>Support for local communities</li>
+            </ul>
+            
+            </div>
+                </div>
+
+            </div>
+            
+        </section>
+        <section class="impact"></section>
+    </main>
+    <footer>
+        <section class="plant-tree"></section>
+        <section class="copyright-info"></section>
+    </footer>
   </body>
 </html>
