@@ -1,3 +1,5 @@
+
+
 const loadTreeCategories = () => {
     fetch("https://openapi.programming-hero.com/api/categories")
     .then((res) => res.json())
@@ -105,6 +107,10 @@ const displayPlants = (plants) => {
         const treeName = card.querySelector("h2.card-title");
 treeName.addEventListener("click",() => openModal(plant));
 
+const addToCardBtn = card.querySelector("button.btn-primary")
+addToCardBtn.addEventListener("click",() => addToCart(plant));
+
+
     };
 };
 
@@ -115,13 +121,13 @@ const openModal = (plant) => {
     const content = document.getElementById("modalContent")
 
     content.innerHTML = `
-    <figure class="px-4 pt-4 overflow-hidden ">
-                <img class="rounded-md object-contain w-full max-h-60"
+    <figure class="px-2 pt-2 overflow-hidden ">
+                <img class="rounded-md object-contain w-full max-h-[60vh] "
                   src="${plant.image}"
                   alt="${plant.name}"
                 />
               </figure>
-              <div class="card-body flex flex-col justify-between flex-1">
+              <div class="card-body flex flex-col justify-between flex-1 p-0">
                 <h2 class="card-title font-bold text-base ">${plant.name}</h2>
                 <p class="text-xs font-light">
                   ${plant.description}
@@ -131,11 +137,7 @@ const openModal = (plant) => {
                     ${plant.category}
                   </div>
                   <div class="price">৳${plant.price}</div>
-                </div>
-                <button class="btn btn-primary bg-[#15803D] text-[#FFFFFF] border-none">
-                  Add to Cart
-                </button>
-                
+                </div>       
               </div>
               `;
               modal.showModal();
@@ -148,6 +150,52 @@ document.getElementById("closeModal").addEventListener("click", () => {
 
 })
 
+let cartData = [];
+
+  // add plant to cart
+  function addToCart(plant) {
+    cartData.push({
+    name: plant.name,
+    price: plant.price
+  });
+  renderCart();
+  }
+
+// render cart items
+function renderCart() {
+    const cartList = document.getElementById("cartList");
+    cartList.innerHTML = "";
+
+   let total = 0
+
+   cartData.forEach((item, index) => {
+    total += item.price;
+
+    const div =  document.createElement("div");
+    
+
+
+    div.innerHTML = `
+    <div class=" card flex flex-row gap-5 justify-between bg-[#F0FDF4] p-3 rounded-md">   
+        <div class="flex flex-col">
+          <p class="font-semibold text-[#1F2937]">${item.name}</p>
+          <p class="text-[#1F2937] font-light">৳${item.price}</p>
+        </div>
+        <button class="removeBtn" data-index="${index}"><i class="fa-solid fa-xmark text-[#1F2937] font-light"></i></button>
+        </div>`;
+    cartList.appendChild(div)
+   });
+
+  // remove individual item
+  document.querySelectorAll(".removeBtn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const i = btn.getAttribute("data-index");
+      cartData.splice(i , 1);
+      renderCart();
+    })
+  });
+  }
+  
 
 
 loadTreeCategories()
