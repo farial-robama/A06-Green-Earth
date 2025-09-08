@@ -84,7 +84,7 @@ const displayPlants = (plants) => {
                 />
               </figure>
               <div class="card-body flex flex-col justify-between flex-1">
-                <h2 class="card- font-bold text-base">${plant.name}</h2>
+                <h2 class="card-title font-bold text-base cursor-pointer">${plant.name}</h2>
                 <p class="text-xs font-light line-clamp-5">
                   ${plant.description}
                 </p>
@@ -101,7 +101,53 @@ const displayPlants = (plants) => {
             </div>
         `;
         plantsContainer.appendChild(card);
+
+        const treeName = card.querySelector("h2.card-title");
+treeName.addEventListener("click",() => openModal(plant));
+
     };
 };
+
+
+
+const openModal = (plant) => {
+    const modal = document.getElementById("treeModal")
+    const content = document.getElementById("modalContent")
+
+    content.innerHTML = `
+    <figure class="px-4 pt-4 overflow-hidden ">
+                <img class="rounded-md object-contain w-full max-h-60"
+                  src="${plant.image}"
+                  alt="${plant.name}"
+                />
+              </figure>
+              <div class="card-body flex flex-col justify-between flex-1">
+                <h2 class="card-title font-bold text-base ">${plant.name}</h2>
+                <p class="text-xs font-light">
+                  ${plant.description}
+                </p>
+                <div class="card-actions justify-between">
+                  <div class="badge badge-outline bg-[#DCFCE7] text-[#15803D] border-none">
+                    ${plant.category}
+                  </div>
+                  <div class="price">৳${plant.price}</div>
+                </div>
+                <button class="btn btn-primary bg-[#15803D] text-[#FFFFFF] border-none">
+                  Add to Cart
+                </button>
+                
+              </div>
+              `;
+              modal.showModal();
+
+};
+
+document.getElementById("closeModal").addEventListener("click", () => {
+    document.getElementById("treeModal").close();
+   
+
+})
+
+
 
 loadTreeCategories()
