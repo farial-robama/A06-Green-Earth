@@ -7,6 +7,7 @@ const loadTreeCategories = () => {
 };
 
 const loadAllPlants =() => {
+    manageSpinner(true);
     fetch(`https://openapi.programming-hero.com/api/plants`)
     .then((res) => res.json())
     .then((json) => {
@@ -19,6 +20,7 @@ const loadAllPlants =() => {
 }
 
 const loadPlantsByCategory = (categoryId) => {
+    manageSpinner(true);
     fetch(`https://openapi.programming-hero.com/api/category/${categoryId}`)
     .then((res) => res.json())
     .then((json) => {
@@ -27,6 +29,19 @@ const loadPlantsByCategory = (categoryId) => {
     })
     .catch((err) => console.error("Error loading category:", err));
 }
+
+
+const manageSpinner = (status) => {
+  if (status === true) {
+    document.getElementById("spinner").classList.remove("hidden");
+    document.getElementById("plantsContainer").classList.add("hidden");
+    document.getElementById("cartContainer").classList.add("hidden");
+  }else {
+    document.getElementById("plantsContainer").classList.remove("hidden");
+    document.getElementById("spinner").classList.add("hidden");
+    document.getElementById("cartContainer").classList.remove("hidden");
+  }
+};
 
 const displayCategories = (categories) => {
     const treeCategories = document.getElementById("treeCategories");
@@ -113,6 +128,7 @@ addToCardBtn.addEventListener("click",() => addToCart(plant));
 
 
     };
+    manageSpinner(false);
 };
 
 
@@ -181,11 +197,9 @@ function renderCart() {
     total += item.price * item.quantity;
     const div =  document.createElement("div");
     
-
-
     div.innerHTML = `
     <div class=" card flex flex-row gap-5 justify-between bg-[#F0FDF4] p-3 rounded-md">   
-        <div class="flex flex-col">
+        <div class="flex flex-col gap-4">
           <p class="font-semibold text-[#1F2937]">${item.name}</p>
           <p class="text-[#8C8C8C] font-light">৳${item.price} x ${item.quantity} </p>
         </div>
@@ -195,18 +209,21 @@ function renderCart() {
    });
 
    //  show total
-  let totalDiv = document.getElementById("cartTotal");
-  if (!totalDiv) {
-    totalDiv = document.createElement("div");
-    totalDiv.id = "cartTotal";
-    // totalDiv.className = "flex flex-row justify-between border-t-[#1F2937] border-t-1 text-[#1F2937]"
-    cartList.parentElement.appendChild(totalDiv);
-  }
+  // let totalDiv = document.getElementById("cartTotal");
+  // // if (!totalDiv) {
+  //   totalDiv = document.createElement("div");
+  //   
+  //   cartList.appendChild(totalDiv);
+  // }
+  const totalDiv = document.createElement("div");
+  totalDiv.id = "cartTotal"
   totalDiv.innerHTML = `
-  <div class="flex flex-row justify-between  border-t border-[#EDEDED] mt-2 pt-1 text-[#1F2937]">
+  <div class="flex flex-row justify-between border-t border-[#EDEDED] mt-2 pt-1 text-[#1F2937]">
               <p class="font-semibold text-base">Total:</p>
               <p class="font-semibold text-base">৳${total}</p>
             </div>`;
+  cartList.appendChild(totalDiv);
+            
 
   // remove individual item
   document.querySelectorAll(".removeBtn").forEach(btn => {
@@ -219,10 +236,6 @@ function renderCart() {
     })
   });
   }
-
-
-  
-  
 
 
 loadTreeCategories()
