@@ -5,6 +5,7 @@ const loadTreeCategories = () => {
     .catch((err) => console.error("Error loading categories:", err));
 };
 
+
 const loadAllPlants = () => {
   manageSpinner(true);
   fetch(`https://openapi.programming-hero.com/api/plants`)
@@ -17,6 +18,7 @@ const loadAllPlants = () => {
     })
     .catch((err) => console.error("Error loading category:", err));
 };
+
 
 const loadPlantsByCategory = (categoryId) => {
   manageSpinner(true);
@@ -31,6 +33,7 @@ const loadPlantsByCategory = (categoryId) => {
     .catch((err) => console.error("Error loading category:", err));
 };
 
+
 const manageSpinner = (status) => {
   if (status === true) {
     document.getElementById("spinner").classList.remove("hidden");
@@ -42,6 +45,7 @@ const manageSpinner = (status) => {
     document.getElementById("cartContainer").classList.remove("hidden");
   }
 };
+
 
 const displayCategories = (categories) => {
   const treeCategories = document.getElementById("treeCategories");
@@ -85,6 +89,7 @@ const displayCategories = (categories) => {
   loadAllPlants();
 };
 
+
 const displayPlants = (plants) => {
   const plantsContainer = document.getElementById("plantsContainer");
   plantsContainer.innerHTML = "";
@@ -100,7 +105,7 @@ const displayPlants = (plants) => {
                 />
               </figure>
               <div class="card-body flex flex-col justify-between flex-1">
-                <h2 class="card-title font-bold text-base cursor-pointer">${plant.name}</h2>
+                <h2 class="card-title font-semibold text-base cursor-pointer">${plant.name}</h2>
                 <p class="text-xs font-light line-clamp-5">
                   ${plant.description}
                 </p>
@@ -108,7 +113,7 @@ const displayPlants = (plants) => {
                   <div class="badge badge-outline bg-[#DCFCE7] text-[#15803D] border-none">
                     ${plant.category}
                   </div>
-                  <div class="price">৳${plant.price}</div>
+                  <div class="price font-semibold">৳${plant.price}</div>
                 </div>
                 <button class="btn btn-primary bg-[#15803D] text-[#FFFFFF] border-none">
                   Add to Cart
@@ -126,6 +131,7 @@ const displayPlants = (plants) => {
   }
   manageSpinner(false);
 };
+
 
 const openModal = (plant) => {
   const modal = document.getElementById("treeModal");
@@ -148,7 +154,7 @@ const openModal = (plant) => {
                   <div class="badge badge-outline bg-[#DCFCE7] text-[#15803D] border-none">
                     ${plant.category}
                   </div>
-                  <div class="price">৳${plant.price}</div>
+                  <div class="price font-semibold">৳${plant.price}</div>
                 </div>       
               </div>
               `;
@@ -158,6 +164,7 @@ const openModal = (plant) => {
 document.getElementById("closeModal").addEventListener("click", () => {
   document.getElementById("treeModal").close();
 });
+
 
 let cartData = [];
 
@@ -202,7 +209,7 @@ function renderCart() {
           <p class="font-semibold text-[#1F2937]">${item.name}</p>
           <p class="text-[#8C8C8C] font-light">৳${item.price} x ${item.quantity} </p>
         </div>
-        <button class="removeBtn" data-index="${index}"><i class="fa-solid fa-xmark text-[#8C8C8C] font-thin"></i></button>
+        <button class="removeBtn" data-index="${index}"><svg class="text-[#8C8C8C]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m6.4 18.308l-.708-.708l5.6-5.6l-5.6-5.6l.708-.708l5.6 5.6l5.6-5.6l.708.708l-5.6 5.6l5.6 5.6l-.708.708l-5.6-5.6z"/></svg></button>
         </div>`;
     cartList.appendChild(div);
   });
