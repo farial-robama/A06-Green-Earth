@@ -26,7 +26,7 @@
 - Returns a new array containing only elements that satisfy the condition.
   
 #### 3) What are arrow functions in ES6?
-#### arrow functions in ES6:
+#### Arrow functions in ES6:
 - A shorter syntax for writing functions.
 - Do not have their own this or arguments.
 - Commonly used for callbacks.
