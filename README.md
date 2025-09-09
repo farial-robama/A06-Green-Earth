@@ -54,12 +54,17 @@ console.log(a, b, c);
 #### Example with object:
 const person = { name: "Asha", age: 25 };
 
-//Old way
-const personName = person.name;
-const personAge = person.age;
+//Old way  
 
-//destructuring way 
-const { name, age } = person;
+const personName = person.name;  
+
+const personAge = person.age;  
+
+
+//Destructuring way  
+
+const { name, age } = person;  
+
 
 console.log(name, age);
 
