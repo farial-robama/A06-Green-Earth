@@ -32,7 +32,7 @@
 - Commonly used for callbacks.
   
 #### 4) How does destructuring assignment work in ES6?
-#### destructuring assignment:
+#### Destructuring assignment:
 Destructuring means picking values from arrays or objects and putting them into variables directly.
 Instead of writing many lines to get values, we can do it in one step.
 #### Example with array : 
