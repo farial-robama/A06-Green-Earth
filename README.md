@@ -36,13 +36,19 @@
 Destructuring means picking values from arrays or objects and putting them into variables directly.
 Instead of writing many lines to get values, we can do it in one step.
 #### Example with array : 
-const numbers = [10, 20, 30];
-//Old way 
-const first = numbers[0];
-const second = numbers[1];
+const numbers = [10, 20, 30];  
 
-//Destructuring way
-const [a, b, c] = numbers;
+//Old way  
+
+const first = numbers[0];  
+
+const second = numbers[1];  
+
+
+//Destructuring way  
+
+const [a, b, c] = numbers;  
+
 
 console.log(a, b, c);
 #### Example with object:
