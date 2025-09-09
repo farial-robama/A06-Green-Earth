@@ -1,5 +1,4 @@
 
-
 const loadTreeCategories = () => {
     fetch("https://openapi.programming-hero.com/api/categories")
     .then((res) => res.json())
@@ -11,7 +10,9 @@ const loadAllPlants =() => {
     fetch(`https://openapi.programming-hero.com/api/plants`)
     .then((res) => res.json())
     .then((json) => {
-        const plantsArray = Array.isArray(json.plants) ? json.plants : [json.plants];
+      console.log(json);
+      
+        const plantsArray = json.plants || json.data?.plants || [];
         displayPlants(plantsArray)
     })
     .catch((err) => console.error("Error loading category:", err));
@@ -154,10 +155,18 @@ let cartData = [];
 
   // add plant to cart
   function addToCart(plant) {
-    cartData.push({
-    name: plant.name,
-    price: plant.price
-  });
+    let existingItem = cartData.find(item => item.name === plant.name);
+    if (existingItem) {
+      existingItem.quantity++;
+    }else{
+      cartData.push({
+      name: plant.name,
+      price: plant.price,
+      quantity: 1
+    })
+
+    }
+    
   renderCart();
   }
 
@@ -169,8 +178,7 @@ function renderCart() {
    let total = 0
 
    cartData.forEach((item, index) => {
-    total += item.price;
-
+    total += item.price * item.quantity;
     const div =  document.createElement("div");
     
 
@@ -179,12 +187,26 @@ function renderCart() {
     <div class=" card flex flex-row gap-5 justify-between bg-[#F0FDF4] p-3 rounded-md">   
         <div class="flex flex-col">
           <p class="font-semibold text-[#1F2937]">${item.name}</p>
-          <p class="text-[#1F2937] font-light">৳${item.price}</p>
+          <p class="text-[#8C8C8C] font-light">৳${item.price} x ${item.quantity} </p>
         </div>
-        <button class="removeBtn" data-index="${index}"><i class="fa-solid fa-xmark text-[#1F2937] font-light"></i></button>
+        <button class="removeBtn" data-index="${index}"><i class="fa-solid fa-xmark text-[#8C8C8C] font-thin"></i></button>
         </div>`;
     cartList.appendChild(div)
    });
+
+   //  show total
+  let totalDiv = document.getElementById("cartTotal");
+  if (!totalDiv) {
+    totalDiv = document.createElement("div");
+    totalDiv.id = "cartTotal";
+    // totalDiv.className = "flex flex-row justify-between border-t-[#1F2937] border-t-1 text-[#1F2937]"
+    cartList.parentElement.appendChild(totalDiv);
+  }
+  totalDiv.innerHTML = `
+  <div class="flex flex-row justify-between  border-t border-[#EDEDED] mt-2 pt-1 text-[#1F2937]">
+              <p class="font-semibold text-base">Total:</p>
+              <p class="font-semibold text-base">৳${total}</p>
+            </div>`;
 
   // remove individual item
   document.querySelectorAll(".removeBtn").forEach(btn => {
@@ -192,9 +214,14 @@ function renderCart() {
       const i = btn.getAttribute("data-index");
       cartData.splice(i , 1);
       renderCart();
+
+  
     })
   });
   }
+
+
+  
   
 
 
